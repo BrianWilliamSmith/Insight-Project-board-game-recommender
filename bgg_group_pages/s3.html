@@ -1,0 +1,2223 @@
+
+<!DOCTYPE html>
+<html ng-app="GeekApp" lang="en-US" ng-cloak>
+<head>
+	<meta charset='utf-8'>
+	<meta id="vp" name="viewport" content="width=device-width, initial-scale=1.0">
+			<script>
+			window.addEventListener( 'DOMContentLoaded',  function() {
+				if (window.innerWidth < 960) {
+					var mvp = document.getElementById('vp');
+					mvp.setAttribute('content','width=960');
+				}
+			});
+		</script>
+		<meta content='yes' name='apple-mobile-web-app-capable'>
+	<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+
+			<title>Microbadges | BoardGameGeek</title>
+	
+	
+<link rel="apple-touch-icon" 	href="https://cf.geekdo-static.com/icons/touch-icon180.png" />
+<link rel="shortcut icon" 		href="https://cf.geekdo-static.com/icons/favicon2.ico" type="image/ico" />
+<link rel="icon" 					href="https://cf.geekdo-static.com/icons/favicon2.ico" type="image/ico" />
+<link rel="search" 				href="/game-opensearch.xml" type="application/opensearchdescription+xml" title="BGG Game Search" />
+<meta name="apple-mobile-web-app-title" content="BGG">
+
+
+	<meta property="og:image" content="https://cf.geekdo-static.com/images/opengraph/bgg_opengraph.png" />
+
+
+
+
+	<meta name="keywords" content="board game, boardgames, boardgame, board, games, game, hobby, boardgamegeek, geek, geekdo">
+
+						<link rel='stylesheet' type='text/css' href='https://cf.geekdo-static.com/static/geekui_master2_5ed175658c18b.css'>
+					<link rel='stylesheet' type='text/css' href='https://cf.geekdo-static.com/static/css_master2_5ed175649da71.css'>
+			
+	<base href="/">
+
+	
+<script>
+	var GEEK = GEEK || {};
+	GEEK.adBlock = [];
+	GEEK.adConfig = {"blockleaderboard":null,"blockskyscraper":null,"noadsense":null};
+	GEEK.adSlots = {"dfp-leaderboard":{"name":"boardgame_leaderboard_728x90"},"dfp-skyscraper":{"name":"boardgame_skyscraper_160x600"},"dfp-medrect":{"name":"boardgame_rectangle_300x250"},"dfp-medrect-reserved-home":{"name":"boardgame_reserved_home_300x250"}};
+	GEEK.googleTargets = null;
+	GEEK.userid = 2594204;
+	GEEK.domainname = 'boardgamegeek.com';
+	GEEK.domain = 'boardgame';
+	GEEK.geekitemPreload = {};
+	GEEK.geekitemSettings = null;
+	GEEK.geekitemModules = null;
+	GEEK.geekGlobalSettings = {"shutdown_file_ops":"1","shutdown_storeimage_ops":"0","shutdown_edit_avatar":"0","shutdown_file_upload":"0","shutdown_file_download":"0","shutdown_image_upload":"0"};
+	GEEK.geekimageSettings = null;
+	GEEK.legacy = 1;
+	GEEK.apiurlsPrefix = 'https://api.geekdo.com';
+
+	
+		GEEK.apiurls = {
+		'amazon': '/api/amazon',
+		'files': '/api/files',
+		'geekitems': '/api/geekitems',
+		'images': '/api/images',
+		'threads': '/api/forums/threads',
+	 	'forums': '/api/forums',
+		'videos': '/api/videos',
+		'hotness': '/api/hotness',
+		'dynamicinfo': '/api/dynamicinfo',
+		'subtypeinfo': '/api/subtypeinfo',
+		'geekbay': '/api/geekbay',
+		'geekmarket': '/geekmarket/api/v1',
+	    'geekmarketapi': '/api/geekmarket',
+		'geeklists': '/api/geeklists',
+		'reviews': '/api/reviews',
+		'collections': '/api/collections',
+		'linkeditems': '/api/geekitem/linkeditems',
+		'subscriptions': '/api/subscriptions',
+	    'fans': '/api/fans',
+	    'geekpreviews': '/api/geekpreviews',
+	    'geekpreviewitems': '/api/geekpreviewitems',
+	   	'geekpreviewparentitems': '/api/geekpreviewparentitems',
+		'recs': '/api/geekitem/recs',
+	    'awards': '/api/geekawards'
+	};
+</script>
+
+							<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekangular17_master2_5ed175667956b.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekui_master2_5ed175658c18b.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/js_master2_5ed17564269b2.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekoutputtemplates_master2_5ed1756746b91.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekuicommontemplates_master2_5ed175674f45f.js'></script>
+				<!-- why this? -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+<style type='text/css'>
+		.tilebadge
+	{
+		background-image: url('https://cf.geekdo-static.com/sprites/mbs/tilemb_0_11.png');
+	}
+		.icon
+	{
+		background-image: url('https://cf.geekdo-static.com/sprites/icons/tileicon_0_25.png');
+	}
+</style>
+
+<!-- Add to main?
+<link rel="apple-touch-icon" 	href="https://cf.geekdo-static.com/icons/appleicon.png" />
+<link rel="shortcut icon" 		href="https://cf.geekdo-static.com/icons/favicon.ico" type="image/ico" />
+<link rel="icon" 					href="https://cf.geekdo-static.com/icons/favicon.ico" type="image/ico" />
+<link rel="search" 				href="/game-opensearch.xml" type="application/opensearchdescription+xml" title="BGG Game Search" />
+-->
+
+
+
+
+
+<!--this is used only for GeekMap -->
+
+
+<!-- deal with adsense
+	<script type="text/javascript">
+		window.google_analytics_uacct = "UA-104725-1";
+		var googletag = googletag || { };
+		googletag.cmd = googletag.cmd || [];
+		( function() {
+			var gads = document.createElement('script');
+			gads.async = true;
+			gads.type  = 'text/javascript';
+			gads.src   = "//www.googletagservices.com/tag/js/gpt.js";
+			var node = document.getElementsByTagName('script')[0];
+			node.parentNode.insertBefore(gads, node);
+		} )();
+
+		adunits = [
+			{
+				name:    'boardgame_button_120x45',
+				size:    [ 120, 45 ],
+				target:  'dfp-button'
+			},
+			{
+				name:    'boardgame_leaderboard_728x90',
+				size:    [ 728, 90 ],
+				target:  'dfp-leaderboard'
+			},
+			{
+				name:    'boardgame_skyscraper_160x600',
+				size:    [ 160, 600 ],
+				target:  'dfp-skyscraper'
+			},
+			{
+				name:    'boardgame_rectangle_300x250',
+				size:    [ 300, 250 ],
+				target:  'dfp-medrect'
+			},
+			{
+				name:    'boardgame_rectangle_300x250',
+				size:    [ 300, 250 ],
+				target:  'dfp-medrect-reserved-home'
+			},
+			{
+				name:    'boardgame_button_120x90',
+				size:    [ 120, 90 ],
+				target:  'dfp-giftguide'
+			}
+		];
+
+		googletag.cmd.push(function() {
+			for( var i=0; i< adunits.length; i++ )
+			{
+				unit = adunits[i];
+				googletag.defineUnit('/1005854/ca-pub-7206761047394129/'+unit.name, unit.size, unit.target).
+				addService(googletag.pubads());
+			}
+
+			
+			googletag.pubads().setTargeting( "subdomain", "all" );
+			googletag.enableServices();
+		} );
+
+	</script>
+-->
+
+<script>
+	function start() {
+		
+	}
+
+	function ondomready() {
+				
+		GEEK.addHandlers();
+		GEEK.recaptchaKey = '6LfpC3MUAAAAAGRUk4nA-p8bk2F_8ijWX5PIdzun';
+	}
+
+	if( typeof window.addEvent === "function" ) {
+		window.addEvent('domready', function() {
+			ondomready();
+		} );
+	} else {
+		window.addEventListener( "DOMContentLoaded", function() {
+			ondomready();
+	} );
+	}
+	window.onload = start;
+</script>
+
+
+</head>
+
+
+<body ng-controller="GeekOutput_LayoutCtrl as layoutctrl"
+		ng-class="{ 'has-no-max-width' : layoutctrl.geekitemSettings.fluidlayout }">
+
+
+<div>
+	<div hide-ad-block="blockleaderboard">
+		<div class="advertisement advertisement-leaderboard">
+			<div class='center-block' ng-dfp-ad="dfp-leaderboard"></div>
+		</div>
+	</div>
+
+	
+<div id="global-header-outer" class='global-header-outer'
+	  ng-controller="NavCtrl as navctrl"
+	  click-out="navctrl.closeMobileMenu()">
+
+	<geeknav-menu></geeknav-menu>
+</div>
+
+
+	
+	<main class='global-body'
+		  id="mainbody"
+		  ng-class="{ 'has-overlay-sidebar': layoutctrl.showOverlaySidebar, 'has-hidden-fixed-sidebar': layoutctrl.localStorage.hideFixedSidebar }">
+		
+		<a id='mainbodytarget' tabindex="-1"></a>
+		<div class='global-body-content-container container-fluid'>
+			<!-- <button class="btn btn-primary hidden-xs btn-lg feedback-trigger"
+						login-required
+					  feedback-widget
+					  ng-click="feedbackctrl.openFeedback()">
+				<i class="fi-comments"></i>&nbsp; Feedback
+			</button> -->
+
+			<geekoutput-sidebar deactivate-overlay-sidebar='layoutctrl.deactivateOverlaySidebar' show-overlay-sidebar='layoutctrl.showOverlaySidebar'></geekoutput-sidebar>
+
+			
+			<div class='global-body-content pending'  ng-class="{'ready': layoutctrl.ready}">
+				<a id='maincontenttarget' tabindex="-1"></a>
+			
+								<div class="legacy">
+	<div id="container" class="yui-skin-sam">
+		<div id="maincontent" ng-non-bindable>
+			<h2>Browse Microbadges
+<span class='sf' style='margin-left:2em;'>
+	<form method='GET' action='/microbadges' style='display:inline'>
+		<label for="microbadge-creator-input" class="fwn">Creator:</label><input id="microbadge-creator-input" type='text' name='creator'>
+	</form>
+</span>
+</h2>
+<p>
+	<div class='fl'><b><a href='/microbadge/browse/purchase'>Browse Badges for Purchase</a></b></div>
+	<div class='fr'><a href="/microbadges/page/1?groupid=395" target='_self' title="first page">[1]</a>&nbsp;&nbsp;<a href="/microbadges/page/2?groupid=395" target='_self' title="previous page"><b>Prev &laquo;</b></a>&nbsp;&nbsp;<a href="/microbadges/page/1?groupid=395" target='_self' title="page 1">1</a>&nbsp;,&nbsp;<a href="/microbadges/page/2?groupid=395" target='_self' title="page 2">2</a>&nbsp;,&nbsp;<b>3</b>&nbsp;,&nbsp;<a href="/microbadges/page/4?groupid=395" target='_self' title="page 4">4</a>&nbsp;,&nbsp;<a href="/microbadges/page/5?groupid=395" target='_self' title="page 5">5</a>&nbsp;&nbsp;<a href="/microbadges/page/4?groupid=395" target='_self' title="next page"><b>Next &raquo;</b></a>&nbsp;&nbsp;<a href="/microbadges/page/8?groupid=395" target='_self' title="last page">[8]</a></div>	
+	<div class='clear'></div>
+	<br>
+</p>
+
+<table width='100%' class='forum_table'>
+<tr>
+
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/7925"><img alt="Strategic Simulations Inc. fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_7925_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Strategic Simulations Inc. fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>41</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=rmidjord">rmidjord</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/19534"><img alt="Studio Liverpool fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_19534_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Studio Liverpool fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>1</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=spearjr">spearjr</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/45631"><img alt="Taito fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_45631_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Taito fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>5</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=CrazyCatman">CrazyCatman</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/19537"><img alt="Take-Two Interactive fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_19537_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Take-Two Interactive fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>2</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=spearjr">spearjr</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/36045"><img alt="Telltale Games fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_36045_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Telltale Games fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/36046"><img alt="Telltale Games fan - G microbadge" src="https://cf.geekdo-static.com/mbs/mb_36046_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Telltale Games fan - G
+																	<br>("Telltale Games fan")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>5</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/19538"><img alt="THQ Games fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_19538_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								THQ Games fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>10</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=spearjr">spearjr</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/36082"><img alt="Traveller&#039;s Tales fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_36082_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Traveller&#039;s Tales fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>5</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/15779"><img alt="Ubisoft fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_15779_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Ubisoft fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>33</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/9961"><img alt="Valve Software fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_9961_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Valve Software fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>44</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=fbeukema">fbeukema</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/30711"><img alt="Videlectrix fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_30711_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Videlectrix fan
+																	<br>("Videlectrix - &quot;We use computers… to make video games!&quot;")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>9</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=MichMedia">MichMedia</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/19540"><img alt="Virgin Interactive fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_19540_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Virgin Interactive fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>2</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=spearjr">spearjr</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/43819"><img alt="Volition Fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_43819_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Volition Fan
+																	<br>("Fan of Volition Games")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>5</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=XanderF">XanderF</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/23251"><img alt="Williams Entertainment fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_23251_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/398"   >Designers and Publishers</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Williams Entertainment fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>8</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=1nf1n1ty">1nf1n1ty</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/15898"><img alt="Frostbite fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_15898_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1020"   >Engines</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Frostbite fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>6</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/47383"><img alt="Clash Royale League microbadge" src="https://cf.geekdo-static.com/mbs/mb_47383_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Clash Royale League
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>1</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/47384"><img alt="Cloud9 (C9) microbadge" src="https://cf.geekdo-static.com/mbs/mb_47384_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Cloud9 (C9)
+																	<br>("Cloud9")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>3</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/47382"><img alt="Counter-Strike: Global Offensive (CS:GO) microbadge" src="https://cf.geekdo-static.com/mbs/mb_47382_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Counter-Strike: Global Offensive (CS:GO)
+																	<br>("Counter-Strike: Global Offensive")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>4</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/47379"><img alt="ESL Gaming (Electronic Sports League) microbadge" src="https://cf.geekdo-static.com/mbs/mb_47379_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								ESL Gaming (Electronic Sports League)
+																	<br>("ESL Gaming")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>2</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/47385"><img alt="FaZe Clan microbadge" src="https://cf.geekdo-static.com/mbs/mb_47385_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								FaZe Clan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>0</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/48102"><img alt="Fnatic fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_48102_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Fnatic fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>2</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Happyshopper">Happyshopper</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/47380"><img alt="Major League Gaming (MLG) microbadge" src="https://cf.geekdo-static.com/mbs/mb_47380_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Major League Gaming (MLG)
+																	<br>("Major League Gaming")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>0</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/46854"><img alt="Overwatch League (OWL) fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_46854_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Overwatch League (OWL) fan
+																	<br>("Overwatch League fan")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=mightyoak">mightyoak</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/48084"><img alt="TSM fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_48084_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1280"   >eSports</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								TSM fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>6</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Happyshopper">Happyshopper</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35879"><img alt="DeLuxe Executive VGDay badge microbadge" src="https://cf.geekdo-static.com/mbs/mb_35879_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1019"   >Events</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								DeLuxe Executive VGDay badge
+																	<br>("I don&#039;t always display a Video Game Day microbadge, but when I do, I use the DeLuxe Executive™ Video Game Day microbadge with exclusive gold power indicator light.")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>29</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=edbolme">edbolme</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/46406"><img alt="Mario Day microbadge" src="https://cf.geekdo-static.com/mbs/mb_46406_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1019"   >Events</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Mario Day
+																	<br>("MAR10: Happy Mario Day!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>12</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=edbolme">edbolme</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35834"><img alt="Video Game Day microbadge" src="https://cf.geekdo-static.com/mbs/mb_35834_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/1019"   >Events</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Video Game Day
+																	<br>("Video Game Day!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>783</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=edbolme">edbolme</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/34015"><img alt="Beta tester - video games microbadge" src="https://cf.geekdo-static.com/mbs/mb_34015_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/779"   >Gamer Types</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Beta tester - video games
+																	<br>("I like to beta test video games")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>23</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Kaffedrake">Kaffedrake</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/10020"><img alt="Old School Video gamer microbadge" src="https://cf.geekdo-static.com/mbs/mb_10020_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/779"   >Gamer Types</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Old School Video gamer
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>358</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=kevintlee">kevintlee</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/40"><img alt="Online gamer microbadge" src="https://cf.geekdo-static.com/mbs/mb_40_2.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/779"   >Gamer Types</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Online gamer
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>114</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=simonh">simonh</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/1022"><img alt="Retrogamer microbadge" src="https://cf.geekdo-static.com/mbs/mb_1022_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/779"   >Gamer Types</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Retrogamer
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>420</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Legomancer">Legomancer</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/4223"><img alt="Retrogamer microbadge" src="https://cf.geekdo-static.com/mbs/mb_4223_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/779"   >Gamer Types</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Retrogamer
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>102</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=radynski">radynski</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/104"><img alt="Video gamer microbadge" src="https://cf.geekdo-static.com/mbs/mb_104_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/779"   >Gamer Types</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Video gamer
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>717</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	N/A
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/34358"><img alt="I have played 1000 different video games in my lifetime microbadge" src="https://cf.geekdo-static.com/mbs/mb_34358_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I have played 1000 different video games in my lifetime
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>60</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/34355"><img alt="I have played 250 different video games in my lifetime microbadge" src="https://cf.geekdo-static.com/mbs/mb_34355_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I have played 250 different video games in my lifetime
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>17</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/34356"><img alt="I have played 500 different video games in my lifetime microbadge" src="https://cf.geekdo-static.com/mbs/mb_34356_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I have played 500 different video games in my lifetime
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/34357"><img alt="I have played 750 different video games in my lifetime microbadge" src="https://cf.geekdo-static.com/mbs/mb_34357_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I have played 750 different video games in my lifetime
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>12</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/33290"><img alt="Keep Calm and Play Video Games microbadge" src="https://cf.geekdo-static.com/mbs/mb_33290_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Keep Calm and Play Video Games
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>51</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=3wgames">3wgames</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/11518"><img alt="Konami Code fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_11518_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Konami Code fan
+																	<br>("Up, Up, Down, Down, Left, Right, Left, Right, B, A, Start!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>107</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=monteslu">monteslu</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/4665"><img alt="M.A.M.E. fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_4665_0.gif"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								M.A.M.E. fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>130</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=zombiegod">zombiegod</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/14518"><img alt="M.A.M.E. fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_14518_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								M.A.M.E. fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>5</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=zombiegod">zombiegod</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/21794"><img alt="Operation Rainfall supporter microbadge" src="https://cf.geekdo-static.com/mbs/mb_21794_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Operation Rainfall supporter
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>3</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Forbidding">Forbidding</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/23495"><img alt="PlayStation 3 - Every Trophy Counts! microbadge" src="https://cf.geekdo-static.com/mbs/mb_23495_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								PlayStation 3 - Every Trophy Counts!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>41</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/23496"><img alt="PlayStation 3 - I Don&#039;t Care About Trophies microbadge" src="https://cf.geekdo-static.com/mbs/mb_23496_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								PlayStation 3 - I Don&#039;t Care About Trophies
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>11</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/21089"><img alt="Split screen games fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_21089_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Split screen games fan
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>34</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Mymil">Mymil</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/23493"><img alt="Xbox 360 - Every Achievement Counts! microbadge" src="https://cf.geekdo-static.com/mbs/mb_23493_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Xbox 360 - Every Achievement Counts!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>69</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/23494"><img alt="Xbox 360 - I Don&#039;t Care About Achievements microbadge" src="https://cf.geekdo-static.com/mbs/mb_23494_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/789"   >Gaming</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Xbox 360 - I Don&#039;t Care About Achievements
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35255"><img alt="4X fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_35255_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/395"   >Video Game Related</a><div class='ml10'><a  href="/microbadges/group/396"   >Genres</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								4X fan
+																	<br>("Explore • Expand • Exploit • Exterminate")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>139</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=edbolme">edbolme</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		
+	</tr>
+</table>
+
+
+			<div id="legacy_modal"></div>
+		</div>
+	</div>
+</div>
+
+				<div class='global-body-content-secondary'>
+					<geekoutput-footer></geekoutput-footer>
+				</div>
+			</div>
+
+			<div class='global-body-ad' hide-ad-block="blockskyscraper">
+				<div class='advertisement advertisement-top'>
+					<div class="center-block advertisement-adsense-skyscraper" ng-dfp-ad="dfp-skyscraper"></div>
+										<iframe src="/amazon/iframeskyscraperad" class="amazon_skyscraper_ad" title="Amazon ad"></iframe>
+				</div>
+			</div>
+
+		</div>
+	</main>
+</div>
+
+
+<script>
+	window.google_analytics_uacct = "UA-104725-1";
+	(function ( i, s, o, g, r, a, m ) {
+		i[ 'GoogleAnalyticsObject' ] = r;
+		i[ r ] = i[ r ] || function () {
+				(i[ r ].q = i[ r ].q || []).push( arguments )
+			}, i[ r ].l = 1 * new Date();
+		a = s.createElement( o ), m = s.getElementsByTagName( o )[ 0 ];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore( a, m )
+	})
+	( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+	ga( 'create', 'UA-104725-1', 'auto' );
+	ga( 'require', 'displayfeatures' );
+</script>
+
+<script>
+	ga( 'send', 'pageview' );
+</script>
+
+
+
+</body>
+</html>

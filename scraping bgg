@@ -1,0 +1,122 @@
+import requests as rq
+import re
+import time
+import pandas as pd
+import json
+import glob
+
+my_key = open('key.txt', 'r').read()
+headers = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'"}
+
+for file_name in glob.glob('./bgg_group_pages/*.html'):
+    results_page = open(file_name,'r').read()
+    game_groups += re.findall("\/microbadge\/[0-9]+", results_page)
+
+game_groups = [re.sub('\/microbadge\/', '', badge) for badge in game_groups]
+headers = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'"}
+
+for i in range(1,7): #There are 41 pages of groups
+    file_name = 'bgg_group pages/v'+str(i)+'.html'
+    results_page = open(file_name,'r').read()
+    game_groups += re.findall("\/microbadge\/[0-9]+", results_page)
+
+game_groups = [re.sub('\/microbadge\/', '', badge) for badge in game_groups]
+
+# For every video game microbadge, get all of USERS that have the badge and
+# their LOCATIONS. There will be duplicates since some users are in multiple
+# groups.
+users, locations, new_users = [],[],[]
+for badge_id in game_groups:
+    counter, new_users = 1, 'xxx'
+    while len(new_users) > 0:
+        group_url = '/microbadge/owners?badgeid={badge}&pageid={page_num}&showrelated=1&sort=user&action=owners&ajax=1'.format(badge=badge_id, page_num=counter)
+        url = 'https://boardgamegeek.com' + group_url
+        counter += 1
+        r= rq.get(url, headers).text
+        locations += re.findall("(?<=location\\\'>).*?(?=<\/div)", r)
+        new_users = re.findall("(?<=data-urlusername=\\\').*?(?=\\\')", r)
+        users += new_users
+        time.sleep(1)
+        print(str(len(users)) + ',' + str(len(locations)))
+
+with open('bgg_user_names.txt', 'a+') as filehandle:
+    filehandle.writelines("%s\n" % user for user in users)
+
+with open('bgg_user_locations.txt', 'a+') as filehandle:
+    filehandle.writelines("%s\n" % loc for loc in locations)
+
+bgg_users = pd.DataFrame(zip(users, locations), columns=['user_name', 'location'])
+bgg_users = bgg_users.drop_duplicates()
+bgg_users = pd.concat([bgg_users3, bgg_users4])
+
+bgg_users3.to_csv('bgg_user_info.csv')
+
+len(bgg_users3)
+for user_name in bgg_users3.user_name:
+    print(user_name)
+len(steam_users)
+steam_users = []
+for user_name in bgg_users3.user_name:
+    r = rq.get('https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key={steam_key}&vanityurl={steam_url}'.format(steam_key=my_key, steam_url=user_name))
+    steam_users.append(r.text)
+
+(len(steam_users)-steam_users.count('{"response":{"success":42,"message":"No match"}}'))/len(steam_users)
+
+my_key = open('key.txt', 'r').read()
+bgg_users = pd.read_csv("bgg_user_info.csv")
+
+bgg_users['steam_id'] = steam_users
+bgg_users['steam_id'] = bgg_users.steam_id.str.findall('(?<=steamid":")[0-9]*?(?=")')
+bgg_users['steam_id'] = bgg_users.steam_id.str.join('')
+bgg_users.loc[bgg_users.steam_id == '', 'steam_id'] = 'none'
+bgg_users.to_csv('bgg_user_info.csv')
+
+bgg_users = pd.read_csv("bgg_user_info.csv")
+has_games = []
+counter = 0
+game_having_counter = 0
+has_games.count('na')
+has_games.count('private profile')
+len(has_games)-18104-11469
+has_games
+for steam_id in bgg_users.steam_id:
+    if steam_id == 'none':
+        has_games.append('na')
+    else:
+        req = rq.get(
+            'https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={key}&steamid={id}&include_played_free_games=1&include_appinfo=1'.format(
+                key=my_key, id=steam_id))
+        if json.loads(req.text).get('response').get('games') == None:
+                has_games.append('private profile')
+        else:
+            game_having_counter += 1
+            has_games.append(json.loads(req.text).get('response').get('games'))
+            print(game_having_counter)
+    counter += 1
+    print(str(counter) + ": requested user " + steam_id)
+
+bgg_users['has_games'] = has_games
+bgg_users.loc[(bgg_users.has_games!='private profile')&(bgg_users.steam_id!='none'), 'steam_id']
+
+len(set(steam_ids).difference((bgg_users.steam_id)))
+len(steam_ids)
+
+steam_ids = open("group_steam_ids.txt", "r").read().split()
+all_steam_users = set(steam_ids).union(set(reviewers))
+bgg_users = pd.read_csv('bgg_user_info.csv')
+steam_users_to_check = set(all_steam_users).difference(bgg_users.steam_id)
+
+steam_ids = list(steam_users_to_check)
+
+file = open('vanity_names.txt', 'w+')
+for user_id in steam_ids:
+    file = open('vanity_names.txt', 'a+')
+    r = rq.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={id}'.format(key=my_key, id=user_id))
+    vanity_name = re.search('(?<="profileurl":"https://steamcommunity.com/).*?(?=/")', r.text).group()
+    file.write(user_id + ',' + vanity_name + '\n')
+    file.close()
+
+len(bgg_accounts)
+len(steam_ids)
+
+file = open('steam_to_bgg_lookup.txt', 'w+')

@@ -1,0 +1,2220 @@
+
+<!DOCTYPE html>
+<html ng-app="GeekApp" lang="en-US" ng-cloak>
+<head>
+	<meta charset='utf-8'>
+	<meta id="vp" name="viewport" content="width=device-width, initial-scale=1.0">
+			<script>
+			window.addEventListener( 'DOMContentLoaded',  function() {
+				if (window.innerWidth < 960) {
+					var mvp = document.getElementById('vp');
+					mvp.setAttribute('content','width=960');
+				}
+			});
+		</script>
+		<meta content='yes' name='apple-mobile-web-app-capable'>
+	<meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+
+			<title>Microbadges | BoardGameGeek</title>
+	
+	
+<link rel="apple-touch-icon" 	href="https://cf.geekdo-static.com/icons/touch-icon180.png" />
+<link rel="shortcut icon" 		href="https://cf.geekdo-static.com/icons/favicon2.ico" type="image/ico" />
+<link rel="icon" 					href="https://cf.geekdo-static.com/icons/favicon2.ico" type="image/ico" />
+<link rel="search" 				href="/game-opensearch.xml" type="application/opensearchdescription+xml" title="BGG Game Search" />
+<meta name="apple-mobile-web-app-title" content="BGG">
+
+
+	<meta property="og:image" content="https://cf.geekdo-static.com/images/opengraph/bgg_opengraph.png" />
+
+
+
+
+	<meta name="keywords" content="board game, boardgames, boardgame, board, games, game, hobby, boardgamegeek, geek, geekdo">
+
+						<link rel='stylesheet' type='text/css' href='https://cf.geekdo-static.com/static/geekui_master2_5ed175658c18b.css'>
+					<link rel='stylesheet' type='text/css' href='https://cf.geekdo-static.com/static/css_master2_5ed175649da71.css'>
+			
+	<base href="/">
+
+	
+<script>
+	var GEEK = GEEK || {};
+	GEEK.adBlock = [];
+	GEEK.adConfig = {"blockleaderboard":null,"blockskyscraper":null,"noadsense":null};
+	GEEK.adSlots = {"dfp-leaderboard":{"name":"boardgame_leaderboard_728x90"},"dfp-skyscraper":{"name":"boardgame_skyscraper_160x600"},"dfp-medrect":{"name":"boardgame_rectangle_300x250"},"dfp-medrect-reserved-home":{"name":"boardgame_reserved_home_300x250"}};
+	GEEK.googleTargets = null;
+	GEEK.userid = 2594204;
+	GEEK.domainname = 'boardgamegeek.com';
+	GEEK.domain = 'boardgame';
+	GEEK.geekitemPreload = {};
+	GEEK.geekitemSettings = null;
+	GEEK.geekitemModules = null;
+	GEEK.geekGlobalSettings = {"shutdown_file_ops":"1","shutdown_storeimage_ops":"0","shutdown_edit_avatar":"0","shutdown_file_upload":"0","shutdown_file_download":"0","shutdown_image_upload":"0"};
+	GEEK.geekimageSettings = null;
+	GEEK.legacy = 1;
+	GEEK.apiurlsPrefix = 'https://api.geekdo.com';
+
+	
+		GEEK.apiurls = {
+		'amazon': '/api/amazon',
+		'files': '/api/files',
+		'geekitems': '/api/geekitems',
+		'images': '/api/images',
+		'threads': '/api/forums/threads',
+	 	'forums': '/api/forums',
+		'videos': '/api/videos',
+		'hotness': '/api/hotness',
+		'dynamicinfo': '/api/dynamicinfo',
+		'subtypeinfo': '/api/subtypeinfo',
+		'geekbay': '/api/geekbay',
+		'geekmarket': '/geekmarket/api/v1',
+	    'geekmarketapi': '/api/geekmarket',
+		'geeklists': '/api/geeklists',
+		'reviews': '/api/reviews',
+		'collections': '/api/collections',
+		'linkeditems': '/api/geekitem/linkeditems',
+		'subscriptions': '/api/subscriptions',
+	    'fans': '/api/fans',
+	    'geekpreviews': '/api/geekpreviews',
+	    'geekpreviewitems': '/api/geekpreviewitems',
+	   	'geekpreviewparentitems': '/api/geekpreviewparentitems',
+		'recs': '/api/geekitem/recs',
+	    'awards': '/api/geekawards'
+	};
+</script>
+
+							<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekangular17_master2_5ed175667956b.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekui_master2_5ed175658c18b.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/js_master2_5ed17564269b2.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekoutputtemplates_master2_5ed1756746b91.js'></script>
+					<script type='text/javascript' src='https://cf.geekdo-static.com/static/geekuicommontemplates_master2_5ed175674f45f.js'></script>
+				<!-- why this? -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+<style type='text/css'>
+		.tilebadge
+	{
+		background-image: url('https://cf.geekdo-static.com/sprites/mbs/tilemb_0_11.png');
+	}
+		.icon
+	{
+		background-image: url('https://cf.geekdo-static.com/sprites/icons/tileicon_0_25.png');
+	}
+</style>
+
+<!-- Add to main?
+<link rel="apple-touch-icon" 	href="https://cf.geekdo-static.com/icons/appleicon.png" />
+<link rel="shortcut icon" 		href="https://cf.geekdo-static.com/icons/favicon.ico" type="image/ico" />
+<link rel="icon" 					href="https://cf.geekdo-static.com/icons/favicon.ico" type="image/ico" />
+<link rel="search" 				href="/game-opensearch.xml" type="application/opensearchdescription+xml" title="BGG Game Search" />
+-->
+
+
+
+
+
+<!--this is used only for GeekMap -->
+
+
+<!-- deal with adsense
+	<script type="text/javascript">
+		window.google_analytics_uacct = "UA-104725-1";
+		var googletag = googletag || { };
+		googletag.cmd = googletag.cmd || [];
+		( function() {
+			var gads = document.createElement('script');
+			gads.async = true;
+			gads.type  = 'text/javascript';
+			gads.src   = "//www.googletagservices.com/tag/js/gpt.js";
+			var node = document.getElementsByTagName('script')[0];
+			node.parentNode.insertBefore(gads, node);
+		} )();
+
+		adunits = [
+			{
+				name:    'boardgame_button_120x45',
+				size:    [ 120, 45 ],
+				target:  'dfp-button'
+			},
+			{
+				name:    'boardgame_leaderboard_728x90',
+				size:    [ 728, 90 ],
+				target:  'dfp-leaderboard'
+			},
+			{
+				name:    'boardgame_skyscraper_160x600',
+				size:    [ 160, 600 ],
+				target:  'dfp-skyscraper'
+			},
+			{
+				name:    'boardgame_rectangle_300x250',
+				size:    [ 300, 250 ],
+				target:  'dfp-medrect'
+			},
+			{
+				name:    'boardgame_rectangle_300x250',
+				size:    [ 300, 250 ],
+				target:  'dfp-medrect-reserved-home'
+			},
+			{
+				name:    'boardgame_button_120x90',
+				size:    [ 120, 90 ],
+				target:  'dfp-giftguide'
+			}
+		];
+
+		googletag.cmd.push(function() {
+			for( var i=0; i< adunits.length; i++ )
+			{
+				unit = adunits[i];
+				googletag.defineUnit('/1005854/ca-pub-7206761047394129/'+unit.name, unit.size, unit.target).
+				addService(googletag.pubads());
+			}
+
+			
+			googletag.pubads().setTargeting( "subdomain", "all" );
+			googletag.enableServices();
+		} );
+
+	</script>
+-->
+
+<script>
+	function start() {
+		
+	}
+
+	function ondomready() {
+				
+		GEEK.addHandlers();
+		GEEK.recaptchaKey = '6LfpC3MUAAAAAGRUk4nA-p8bk2F_8ijWX5PIdzun';
+	}
+
+	if( typeof window.addEvent === "function" ) {
+		window.addEvent('domready', function() {
+			ondomready();
+		} );
+	} else {
+		window.addEventListener( "DOMContentLoaded", function() {
+			ondomready();
+	} );
+	}
+	window.onload = start;
+</script>
+
+
+</head>
+
+
+<body ng-controller="GeekOutput_LayoutCtrl as layoutctrl"
+		ng-class="{ 'has-no-max-width' : layoutctrl.geekitemSettings.fluidlayout }">
+
+
+<div>
+	<div hide-ad-block="blockleaderboard">
+		<div class="advertisement advertisement-leaderboard">
+			<div class='center-block' ng-dfp-ad="dfp-leaderboard"></div>
+		</div>
+	</div>
+
+	
+<div id="global-header-outer" class='global-header-outer'
+	  ng-controller="NavCtrl as navctrl"
+	  click-out="navctrl.closeMobileMenu()">
+
+	<geeknav-menu></geeknav-menu>
+</div>
+
+
+	
+	<main class='global-body'
+		  id="mainbody"
+		  ng-class="{ 'has-overlay-sidebar': layoutctrl.showOverlaySidebar, 'has-hidden-fixed-sidebar': layoutctrl.localStorage.hideFixedSidebar }">
+		
+		<a id='mainbodytarget' tabindex="-1"></a>
+		<div class='global-body-content-container container-fluid'>
+			<!-- <button class="btn btn-primary hidden-xs btn-lg feedback-trigger"
+						login-required
+					  feedback-widget
+					  ng-click="feedbackctrl.openFeedback()">
+				<i class="fi-comments"></i>&nbsp; Feedback
+			</button> -->
+
+			<geekoutput-sidebar deactivate-overlay-sidebar='layoutctrl.deactivateOverlaySidebar' show-overlay-sidebar='layoutctrl.showOverlaySidebar'></geekoutput-sidebar>
+
+			
+			<div class='global-body-content pending'  ng-class="{'ready': layoutctrl.ready}">
+				<a id='maincontenttarget' tabindex="-1"></a>
+			
+								<div class="legacy">
+	<div id="container" class="yui-skin-sam">
+		<div id="maincontent" ng-non-bindable>
+			<h2>Browse Microbadges
+<span class='sf' style='margin-left:2em;'>
+	<form method='GET' action='/microbadges' style='display:inline'>
+		<label for="microbadge-creator-input" class="fwn">Creator:</label><input id="microbadge-creator-input" type='text' name='creator'>
+	</form>
+</span>
+</h2>
+<p>
+	<div class='fl'><b><a href='/microbadge/browse/purchase'>Browse Badges for Purchase</a></b></div>
+	<div class='fr'><a href="/microbadges/page/1?groupid=362" target='_self' title="first page">[1]</a>&nbsp;&nbsp;<a href="/microbadges/page/2?groupid=362" target='_self' title="previous page"><b>Prev &laquo;</b></a>&nbsp;&nbsp;<a href="/microbadges/page/1?groupid=362" target='_self' title="page 1">1</a>&nbsp;,&nbsp;<a href="/microbadges/page/2?groupid=362" target='_self' title="page 2">2</a>&nbsp;,&nbsp;<b>3</b>&nbsp;,&nbsp;<a href="/microbadges/page/4?groupid=362" target='_self' title="page 4">4</a>&nbsp;,&nbsp;<a href="/microbadges/page/5?groupid=362" target='_self' title="page 5">5</a>&nbsp;&nbsp;<a href="/microbadges/page/4?groupid=362" target='_self' title="next page"><b>Next &raquo;</b></a>&nbsp;&nbsp;<a href="/microbadges/page/6?groupid=362" target='_self' title="last page">[6]</a></div>	
+	<div class='clear'></div>
+	<br>
+</p>
+
+<table width='100%' class='forum_table'>
+<tr>
+
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20120"><img alt="I follow @videogamegeek on Twitter microbadge" src="https://cf.geekdo-static.com/mbs/mb_20120_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/775"   >Fandom</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I follow @videogamegeek on Twitter
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>52</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=kevintlee">kevintlee</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35845"><img alt="I met my love on VGG microbadge" src="https://cf.geekdo-static.com/mbs/mb_35845_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/775"   >Fandom</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I met my love on VGG
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>1</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/18379"><img alt="I spent hours on VGG and all I got is this lousy microbadge! microbadge" src="https://cf.geekdo-static.com/mbs/mb_18379_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/775"   >Fandom</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								I spent hours on VGG and all I got is this lousy microbadge!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>138</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=drewdane">drewdane</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/42854"><img alt="VGG Facebook page fan microbadge" src="https://cf.geekdo-static.com/mbs/mb_42854_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/775"   >Fandom</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								VGG Facebook page fan
+																	<br>("I follow Videogamegeek on Facebook")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>28</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Sjeng">Sjeng</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/42208"><img alt="Frumpish&#039;s Fifth Annual Browser Game FLASH-O-RAMA! microbadge" src="https://cf.geekdo-static.com/mbs/mb_42208_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1075"   >Frumpish's Annual Browser Game FLASH-O-RAMA!</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Frumpish&#039;s Fifth Annual Browser Game FLASH-O-RAMA!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>38</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35808"><img alt="Frumpish&#039;s First Annual Browser Game FLASH-O-RAMA! microbadge" src="https://cf.geekdo-static.com/mbs/mb_35808_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1075"   >Frumpish's Annual Browser Game FLASH-O-RAMA!</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Frumpish&#039;s First Annual Browser Game FLASH-O-RAMA!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>18</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/39616"><img alt="Frumpish&#039;s Fourth Annual Browser Game FLASH-O-RAMA! microbadge" src="https://cf.geekdo-static.com/mbs/mb_39616_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1075"   >Frumpish's Annual Browser Game FLASH-O-RAMA!</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Frumpish&#039;s Fourth Annual Browser Game FLASH-O-RAMA!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35825"><img alt="Frumpish&#039;s Second Annual Browser Game FLASH-O-RAMA! microbadge" src="https://cf.geekdo-static.com/mbs/mb_35825_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1075"   >Frumpish's Annual Browser Game FLASH-O-RAMA!</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Frumpish&#039;s Second Annual Browser Game FLASH-O-RAMA!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>21</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/35826"><img alt="Frumpish&#039;s Third Annual Browser Game FLASH-O-RAMA! microbadge" src="https://cf.geekdo-static.com/mbs/mb_35826_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1075"   >Frumpish's Annual Browser Game FLASH-O-RAMA!</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Frumpish&#039;s Third Annual Browser Game FLASH-O-RAMA!
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>21</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/33463"><img alt="2014 VGG Halloween Avatar Dress Up Participant microbadge" src="https://cf.geekdo-static.com/mbs/mb_33463_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1072"   >Halloween Avatar Dress Up</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								2014 VGG Halloween Avatar Dress Up Participant
+																	<br>("2014 VGG Halloween avatar dress up participant")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>88</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Kattvippa">Kattvippa</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/36396"><img alt="2015 VGG Halloween Avatar Dress Up Participant microbadge" src="https://cf.geekdo-static.com/mbs/mb_36396_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1072"   >Halloween Avatar Dress Up</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								2015 VGG Halloween Avatar Dress Up Participant
+																	<br>("2015 VGG Halloween avatar dress up participant")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>101</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Thorin2001">Thorin2001</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/40013"><img alt="2016 VGG Halloween avatar dress up participant microbadge" src="https://cf.geekdo-static.com/mbs/mb_40013_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1072"   >Halloween Avatar Dress Up</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								2016 VGG Halloween avatar dress up participant
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>103</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/42534"><img alt="2017 VGG Halloween Avatar Dress Up Participant microbadge" src="https://cf.geekdo-static.com/mbs/mb_42534_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1072"   >Halloween Avatar Dress Up</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								2017 VGG Halloween Avatar Dress Up Participant
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>97</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Sjeng">Sjeng</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/42535"><img alt="2018 VGG Halloween Avatar Dress Up Participant microbadge" src="https://cf.geekdo-static.com/mbs/mb_42535_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1072"   >Halloween Avatar Dress Up</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								2018 VGG Halloween Avatar Dress Up Participant
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>96</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Sjeng">Sjeng</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/48115"><img alt="2019 VGG Halloween Avatar Dress Up Participant microbadge" src="https://cf.geekdo-static.com/mbs/mb_48115_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1072"   >Halloween Avatar Dress Up</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								2019 VGG Halloween Avatar Dress Up Participant
+																	<br>("2019 VGG Halloween avatar dress up participant")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>84</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Sjeng">Sjeng</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20345"><img alt="Level 01 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20345_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 01 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>483</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20346"><img alt="Level 02 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20346_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 02 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>249</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20347"><img alt="Level 03 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20347_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 03 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>166</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20348"><img alt="Level 04 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20348_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 04 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>117</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20349"><img alt="Level 05 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20349_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 05 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>93</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20350"><img alt="Level 06 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20350_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 06 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>65</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20351"><img alt="Level 07 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20351_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 07 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>51</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20352"><img alt="Level 08 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20352_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 08 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>46</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20353"><img alt="Level 09 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20353_2.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 09 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>36</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20354"><img alt="Level 10 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20354_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 10 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>30</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20355"><img alt="Level 11 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20355_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 11 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>28</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20356"><img alt="Level 12 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20356_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 12 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>21</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20357"><img alt="Level 13 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20357_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 13 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20358"><img alt="Level 14 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20358_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 14 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20359"><img alt="Level 15 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20359_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 15 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>10</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20360"><img alt="Level 16 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20360_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 16 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>9</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20361"><img alt="Level 17 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20361_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 17 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>9</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20362"><img alt="Level 18 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20362_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 18 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>9</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20363"><img alt="Level 19 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20363_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 19 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>8</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/20364"><img alt="Level 20 VGG poster microbadge" src="https://cf.geekdo-static.com/mbs/mb_20364_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Level 20 VGG poster
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>5</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Paolo Robino">Paolo Robino</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/36430"><img alt="VGG lurker microbadge" src="https://cf.geekdo-static.com/mbs/mb_36430_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/783"   >Poster Levels</a></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								VGG lurker
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>19</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=cinderbike">cinderbike</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/21433"><img alt="Project R.E.S.P.E.C.T. Contributor microbadge" src="https://cf.geekdo-static.com/mbs/mb_21433_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1077"   >Project R.E.S.P.E.C.T.</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Project R.E.S.P.E.C.T. Contributor
+																	<br>("I joined Project R.E.S.P.E.C.T. to do my part for Video Game Geek!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>68</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Mymil">Mymil</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/21560"><img alt="Project R.E.S.P.E.C.T. Czar microbadge" src="https://cf.geekdo-static.com/mbs/mb_21560_1.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1077"   >Project R.E.S.P.E.C.T.</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Project R.E.S.P.E.C.T. Czar
+																	<br>("Czar for Project R.E.S.P.E.C.T. : Join with me - and help VGG :)")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>11</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Vonox">Vonox</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25937"><img alt="Soul Ladder - Angel Killer microbadge" src="https://cf.geekdo-static.com/mbs/mb_25937_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Angel Killer
+																	<br>("Soul Ladder - I killed the Angel and got the Soul Shard!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>62</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25933"><img alt="Soul Ladder - Beloved Player microbadge" src="https://cf.geekdo-static.com/mbs/mb_25933_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Beloved Player
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>211</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Ncik">Ncik</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25942"><img alt="Soul Ladder - Bronze microbadge" src="https://cf.geekdo-static.com/mbs/mb_25942_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Bronze
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>200</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25936"><img alt="Soul Ladder - Demon Killer microbadge" src="https://cf.geekdo-static.com/mbs/mb_25936_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Demon Killer
+																	<br>("Soul Ladder - I killed the Demon and got the Soul Shard!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>39</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25938"><img alt="Soul Ladder - DracoTerminator microbadge" src="https://cf.geekdo-static.com/mbs/mb_25938_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - DracoTerminator
+																	<br>("Soul Ladder - I killed the Dragon!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>53</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25934"><img alt="Soul Ladder - Dreaded Player microbadge" src="https://cf.geekdo-static.com/mbs/mb_25934_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Dreaded Player
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>244</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Ncik">Ncik</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25944"><img alt="Soul Ladder - Gold microbadge" src="https://cf.geekdo-static.com/mbs/mb_25944_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Gold
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>70</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25935"><img alt="Soul Ladder - Halfwayer microbadge" src="https://cf.geekdo-static.com/mbs/mb_25935_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Halfwayer
+																	<br>("Soul Ladder - I survived the first 15 days!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>130</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=garion">garion</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25943"><img alt="Soul Ladder - Silver microbadge" src="https://cf.geekdo-static.com/mbs/mb_25943_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Silver
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>141</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=wizcreations">wizcreations</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+						
+		<td align='center' width='33%'>
+			<table width='100%'>
+				<tr>
+					<td width='32' align='center'>
+						<a href="/microbadge/25939"><img alt="Soul Ladder - Soul Orb microbadge" src="https://cf.geekdo-static.com/mbs/mb_25939_0.png"></a>
+					</td>
+				<td class='sf' align='left'>
+					<table width='100%'>
+						<tr>
+							<td width=50>Group</td>
+							<td>
+								<a  href="/microbadges/group/362"   >VGG</a><div class='ml10'><a  href="/microbadges/group/782"   >Events</a><div class='ml10'><a  href="/microbadges/group/1071"   >Soul Ladder</a></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>
+								Soul Ladder - Soul Orb
+																	<br>("Soul Ladder - I won!")
+																
+							</td>
+						</tr>
+
+						<tr>
+							<td>Owners</td>
+							<td>52</td>
+						</tr>
+
+						<tr>
+							<td>Creator:</td>
+							<td>
+																	<a href="/microbadges?creator=Ncik">Ncik</a>
+																								
+							</td>
+						</tr>						
+					</table>							
+				</td>
+			</table>
+		</td>
+					</tr><tr>
+						
+		
+	</tr>
+</table>
+
+
+			<div id="legacy_modal"></div>
+		</div>
+	</div>
+</div>
+
+				<div class='global-body-content-secondary'>
+					<geekoutput-footer></geekoutput-footer>
+				</div>
+			</div>
+
+			<div class='global-body-ad' hide-ad-block="blockskyscraper">
+				<div class='advertisement advertisement-top'>
+					<div class="center-block advertisement-adsense-skyscraper" ng-dfp-ad="dfp-skyscraper"></div>
+										<iframe src="/amazon/iframeskyscraperad" class="amazon_skyscraper_ad" title="Amazon ad"></iframe>
+				</div>
+			</div>
+
+		</div>
+	</main>
+</div>
+
+
+<script>
+	window.google_analytics_uacct = "UA-104725-1";
+	(function ( i, s, o, g, r, a, m ) {
+		i[ 'GoogleAnalyticsObject' ] = r;
+		i[ r ] = i[ r ] || function () {
+				(i[ r ].q = i[ r ].q || []).push( arguments )
+			}, i[ r ].l = 1 * new Date();
+		a = s.createElement( o ), m = s.getElementsByTagName( o )[ 0 ];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore( a, m )
+	})
+	( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+	ga( 'create', 'UA-104725-1', 'auto' );
+	ga( 'require', 'displayfeatures' );
+</script>
+
+<script>
+	ga( 'send', 'pageview' );
+</script>
+
+
+
+</body>
+</html>
