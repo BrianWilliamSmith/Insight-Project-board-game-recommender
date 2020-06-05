@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>Go Analog</title>
+</head>
+<body>
+<h1>Go Analog</h1>
+<h2>Enter steam id below</h2>
+<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.steam_id_form.label }}
+    {{ form.steam_id_form }}
+    <input type="submit" value="get board games">
+</form>
+</body>
+</html>

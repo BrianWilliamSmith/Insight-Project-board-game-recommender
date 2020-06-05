@@ -19,6 +19,7 @@ def lookup_on_bgg(avatar):
         bgg_steam_id = re.search('(?<=steamaccount value=").*?(?=")', r.text).group(0)
     return(bgg_id, bgg_state, bgg_country, bgg_steam_id)
 
+# This takes a very long time! E.g. 10 hours
 bgg_id = []
 for user in steam_users.avatar:
     out = lookup_on_bgg(user)
@@ -27,4 +28,12 @@ for user in steam_users.avatar:
     time.sleep(2)
 
 bgg_id_df = pd.DataFrame(bgg_id, columns=['bgg_id', 'bgg_state', 'bgg_country', 'bgg_steam_id'])
-crossref_users = pd.concat(steam_users, bgg_id_df], axis=0)
+len(steam_users)
+len(bgg_id_df)
+crossref_users = pd.concat([steam_users, bgg_id_df], axis=1)
+crossref_users.to_csv('steam_users_checked_on_bgg.csv')
+
+shared_users_from_steam = crossref_users[crossref_users.bgg_steam_id!='none']
+shared_users_from_steam.reset_index(drop=True, inplace=True)
+
+shared_users_from_steam.to_csv('shared_users_from_steam.csv')

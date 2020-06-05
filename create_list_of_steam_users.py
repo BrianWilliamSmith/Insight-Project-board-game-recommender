@@ -10,6 +10,26 @@ import glob
 #    (each id is on a newline)
 # 2. reviewers of tabletop simulator
 
+# Get list of steam_ids from reviewers of Tabletop simulator
+# Have to send the last cursor value to API to get the next page of results
+
+app_id = '286160'
+new_cursor = '*'
+old_cursor = ''
+reviewers=[]
+while old_cursor != new_cursor:
+    r=rq.get('https://store.steampowered.com/appreviews/{game}?json=1&filter=recent&purchase_type=all&num_per_page=100&cursor={cursor}'.format(game=app_id, cursor=new_cursor))
+    old_cursor = new_cursor
+    new_cursor = json.loads(r.text)['cursor']
+    new_cursor = rq.compat.quote_plus(new_cursor)
+    reviewers += re.findall('(?<=steamid":").*?(?=",)', r.text)
+    print(old_cursor, new_cursor)
+    print('%s reviewers so far' % len(reviewers))
+
+with open('steam_ids_to_check/steam_ids_for_BGG_group_on_steam.txt', 'w+') as file:
+    file.write('\n'.join(reviewers))
+
+# Get information about a user using steam_id
 
 def get_steam_player_info(steam_id, steam_key):
     '''
@@ -30,8 +50,10 @@ def get_steam_player_info(steam_id, steam_key):
         output.append((steam_id, url, profile_state, persona_name))
     return(output)
 
-my_steam_key = open('key.txt').read()
 
+# Go through all of the lists of ids in steam_id folder
+
+my_steam_key = open('key.txt').read()
 steam_users = []
 for file_name in glob.glob('./steam_ids_to_check/*.txt'):
     steam_ids = open(file_name,'r').read().split('\n')
