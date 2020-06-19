@@ -9,9 +9,9 @@ df = pd.DataFrame([dict1, dict2])
 df
 df.append(dict3, ignore_index=True)
 
-bgg_info = pd.read_csv('bgg_info.txt')
+bgg_info = pd.read_csv('csvs/bgg_info.txt')
 list_of_bgs = bgg_info.Name
-plotty = pd.read_csv('steam_users_games.csv')
+plotty = pd.read_csv('csvs/steam_users_games.csv')
 plotty.playtime_forever.hist()
 
 pd.Series(np.log1p(plotty.playtime_forever)).hist()
@@ -73,7 +73,7 @@ fig = sns.distplot(x, kde = False, bins=20, norm_hist=True)
 fig.set(xlabel="Proportion of games reviewed", ylabel="Number of players")
 plt.show()
 
-steamusers = pd.read_csv('steam_users_games.csv')
+steamusers = pd.read_csv('csvs/steam_users_games.csv')
 steamusers = steamusers[steamusers.playtime_forever<15000]
 x = steamusers.groupby('user').playtime_forever.sum()
 x = x[x>0]
@@ -86,3 +86,18 @@ fig.set(xlabel="Total playtime (hours)", ylabel="Proportion of players")
 x.median()
 x.mean()
 plt.show()
+
+x = pd.read_csv('csvs/bgg_GameItem.csv', index_col=0)
+import seaborn as sns
+counts = x.year.value_counts()
+years = list(counts.index)
+counts=list(counts)
+test=pd.DataFrame(zip(years,counts), columns=['years','count'])
+test=test[(test.years>1980)&(test.years<2020)]
+test
+years
+years
+p = sns.lineplot(data=test, x='years', y='count')
+p.set(xlabel='Year', ylabel='Number of boardgames released')
+plt.show()
+sns.set(x)

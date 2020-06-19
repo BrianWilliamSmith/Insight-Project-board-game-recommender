@@ -12,7 +12,7 @@ def recommend_game(user_games, known_games):
     reader = Reader(rating_scale=(1, 10))
     data = Dataset.load_from_df(all_data[['user', 'game', 'rating']], reader)
     trainset = data.build_full_trainset()
-    algo = KNNBasic()
+    algo = KNNBasic(sim_options={'name':'cosine', 'user_based':'False'})
     algo.fit(trainset)
     list_of_known_board_games = known_games[known_games.source=='bgg'].game.unique()
     testset = [(steam_id, board_game, '?') for board_game in list_of_known_board_games]

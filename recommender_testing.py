@@ -1,105 +1,25 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from surprise import Reader, Dataset
 from surprise.model_selection import train_test_split
-from surprise import accuracy
 from surprise import SVD, accuracy, KNNWithMeans, KNNBasic, KNNWithZScore, KNNBaseline
-from surprise import NormalPredictor, BaselineOnly
+from surprise import NormalPredictor, BaselineOnly, prediction_algorithms
+import games_api_functions
 
-# Compare different recommenders
+bgg_steam_data = pd.read_csv('bgg_steam_data_normed.csv', index_col=0)
 
-# Load two datasets to be combined
-bgg_users_games = pd.read_csv('bgg_users_games.csv', index_col=0)
-steam_users_games = pd.read_csv('steam_users_games.csv', index_col=0)
+# Exclude expansions
+no_expansions = pd.read_csv('csvs/bgg_GameItem.csv')
+no_expansions = set(no_expansions.name)
+bgg_steam_data = bgg_steam_data[(bgg_steam_data.source=='steam')|\
+                                (bgg_steam_data.game.isin(no_expansions))]
 
-steam_users_games = steam_users_games[['user', 'appid', 'playtime_forever']]
-
-# Dedupe both datasets
-bgg_users_games.drop_duplicates(inplace=True, ignore_index=True)
-steam_users_games.drop_duplicates(inplace=True, ignore_index=True)
-
-# From steam data, remove games with zero playtime or extreme playtimes
-stdev_playtime = steam_users_games.playtime_forever.std()
-mean_playtime = steam_users_games.playtime_forever.mean()
-playtime_cutoff = 3*stdev_playtime+mean_playtime
-
-steam_users_games = steam_users_games[steam_users_games.playtime_forever>0]
-steam_users_games = steam_users_games[steam_users_games.playtime_forever<playtime_cutoff]
-
-steam_users_games.reset_index(inplace=True)
-bgg_users_games.reset_index(inplace=True)
-len(bgg_users_games),len(steam_users_games)
-
-# Use this csv as a lookup key to add names for comparison with bgg users
-steam_user_lookup = pd.read_csv('steam_users.txt', index_col=0)
-steam_user_lookup = steam_user_lookup[['steam_id','avatar']]
-steam_user_lookup.drop_duplicates(inplace=True)
-
-steam_users_games = steam_users_games.merge(steam_user_lookup,
-                                            how='left',
-                                            left_on='user',
-                                            right_on='steam_id',
-                                            sort=False)
-
-# Identify users in both data sets
-shared_users = set(steam_users_games.avatar).intersection(set(bgg_users_games.user))
-
-# Include only shared users
-bgg_users_games = bgg_users_games[bgg_users_games.user.isin(shared_users)]
-steam_users_games = steam_users_games[steam_users_games.avatar.isin(shared_users)]
-print(bgg_users_games.user.nunique(), steam_users_games.avatar.nunique())
-
-# Create a new dataframe with both bgg data and steam data
-# First, create the user series
-users = list(bgg_users_games.user) + list(steam_users_games.avatar)
-len(users)
-len(bgg_users_games), len(steam_users_games)
-
-# Then create the game series
-steam_games = steam_users_games.appid
-bgg_games = bgg_users_games.game
-
-games = list(bgg_games) + ['steam'+ str(game) for game in steam_games]
-len(bgg_games), len(steam_games)
-
-# Combine ratings and transformed playtimes
-steam_ratings = steam_users_games.playtime_forever.astype('float64')
-steam_ratings = np.log(steam_ratings)
-steam_ratings[steam_ratings>10] = 10
-steam_ratings[steam_ratings<1] = 1
-steam_ratings.mean()
-bgg_ratings = bgg_users_games.rating.astype('float64')
-ratings = list(bgg_ratings) + list(steam_ratings)
-len(bgg_ratings), len(steam_ratings), len(ratings)
-
-# A vector to keep track of source (just in case)
-steam_source = ['steam' for element in steam_ratings]
-bgg_source = ['bgg' for element in bgg_ratings]
-source = bgg_source + steam_source
-len(source)
-
-# Combine everything into magnificent df
-d = {'user':users, 'game':games, 'rating':ratings, 'source':source}
-bgg_steam_data = pd.DataFrame(d)
-len(bgg_steam_data)
-
-# Identify games with 3 or more reviews
-common_games = bgg_steam_data.game.value_counts()
-common_games.describe()
-common_games.head(10)
-
-common_games = common_games.where((common_games>5)&(common_games<200)).dropna().index.tolist()
-
-# Identify users with 3 or more reviews
-active_users = bgg_steam_data.user.value_counts()
-active_users = active_users.where(active_users>2).dropna().index.tolist()
-
-bgg_steam_data = bgg_steam_data[(bgg_steam_data.game.isin(common_games))&
-                                (bgg_steam_data.user.isin(active_users))]
-
+## Starting the recommenders
 u_i_matrix = bgg_steam_data.pivot_table(index = 'game', columns = 'user', values = 'rating')
 u_i_matrix = u_i_matrix.fillna(0)
-
+u_i_matrix
 from numpy import count_nonzero
 sparsity = (1.0 - count_nonzero(u_i_matrix) / u_i_matrix.size)*100
 print(sparsity)
@@ -108,53 +28,166 @@ print(sparsity)
 # loading data
 
 reader = Reader(rating_scale=(1,10))
-data = Dataset.load_from_df(bgg_steam_data[['user', 'game', 'rating']], reader)
+bgg_steam_data.rating_normed.hist()
+bgg_steam_data.rating_normed.describe()
+bgg_steam_data.dropna(inplace=True)
+len(bgg_steam_data)
+plt.show()
 
-trainset, testset = train_test_split(data, test_size=0.25)
-algo = SVD()
-algo.fit(trainset)
-predictions = algo.test(testset)
-algo.test(testset, verbose=True)
-print(accuracy.rmse(predictions))
+# data = Dataset.load_from_df(bgg_steam_data[['user', 'game', 'rating_normed']], reader)
+#
+# trainset, testset = train_test_split(data, test_size=0.25)
+# algo = SVD()
+# algo.fit(trainset)
+# predictions = algo.test(testset)
+# algo.test(testset, verbose=True)
+# print(accuracy.rmse(predictions))
 
-testset
+testgames = just_bgg_data.game.value_counts()
+testgames = testgames[testgames < 45]
+testgames = testgames[testgames < 20]
+testgames = testgames[testgames > 13]
+uncommon_games= list(testgames.index)
 
-algo.fit(trainset)
+import random
+users_15 = random.sample(list(bgg_steam_data.user.unique()), round((bgg_steam_data.user.nunique()/7)))
 
-users_25 = list(bgg_steam_data.user.unique()[:80])
+bool_is_training = ~((bgg_steam_data.user.isin(users_15))&(bgg_steam_data.source=='bgg'))
+bool_is_testing = (~bool_is_training)
 
-bool_is_training = ~((bgg_steam_data.user.isin(users_25))&(bgg_steam_data.source=='bgg'))
+                #  | bgg_steam_data.game.isin(uncommon_games)
 
 trainset2 = bgg_steam_data[bool_is_training]
-trainset2 = Dataset.load_from_df(trainset2[['user', 'game', 'rating']], reader)
+trainset2 = Dataset.load_from_df(trainset2[['user', 'game', 'rating_normed']], reader)
 trainset2 = trainset2.build_full_trainset()
 
-testset2 = bgg_steam_data[~bool_is_training]
-testset2 = Dataset.load_from_df(testset2[['user', 'game', 'rating']], reader)
+testset2 = bgg_steam_data[bool_is_testing]
+testset2 = Dataset.load_from_df(testset2[['user', 'game', 'rating_normed']], reader)
 testset2 = testset2.build_full_trainset()
 testset2 = testset2.build_testset()
 
+known_games = set(bgg_steam_data[bgg_steam_data.source=='bgg'].game)
+testset3 = [(user, game, '?') for user in users_15 for game in known_games]
+
 algo = SVD()
 algo.fit(trainset2)
-predictions = algo.test(testset2)
+predictions = algo.test(testset2, verbose=True)
 print(accuracy.rmse(predictions))
+print(assess_predictions(predictions, total_games))
+
+predictions = algo.test(testset3)
+print(calculate_weighted_coverage(predictions, good_games))
 
 # A dumb baseline -- guess 5
-testvals = [c for (a,b,c) in testset]
-dumb_RMSE = (sum([(val-5)**2 for val in testvals])/len(testvals))**.5
+testvals = [c for (a,b,c) in testset2]
+dumb_RMSE = (sum([(val-5.5)**2 for val in testvals])/len(testvals))**.5
+
+total_games = len(set(bgg_steam_data.game[bgg_steam_data.source == 'bgg']))
+
+# Completely random baseline
+import random
+true_vals = [c for (a,b,c) in testset2]
+est_vals = [random.uniform(1,10) for item in testset2]
+predictions=  [(a, b, c, est_value,'details') for ((a, b, c), est_value) in list(zip(testset2, est_vals))]
+assess_predictions(predictions, total_games)
+
+est_vals = [random.uniform(1,10) for item in testset3]
+predictions=  [(a, b, c, est_value,'details') for ((a, b, c), est_value) in list(zip(testset3, est_vals))]
+print(calculate_coverage(predictions, total_games))
+print(calculate_weighted_coverage(predictions, good_games))
 
 print("Just guessing 5 gives you RMSE of %s"%dumb_RMSE+", not much better...")
 
-algo = KNNBasic()
+sim_options = {'name': 'cosine',
+               'user_based': False  # compute  similarities between items
+               }
+algo = KNNBasic(sim_options=sim_options)
+algo.fit(trainset2)
+predictions = algo.test(testset2)
+print(accuracy.rmse(predictions))
+assess_predictions(predictions, total_games)
+
+predictions = algo.test(testset3)
+print(calculate_weighted_coverage(predictions, good_games))
+0.17757009345794392 * len(good_games)
+
+mean_ratings = bgg_steam_data[bgg_steam_data.source=='bgg'].groupby('game').mean().rating_normed
+mean_ratings = mean_ratings[mean_ratings>5.5]
+good_games = set(mean_ratings.index)
+total_good_games = len(good_games)
+
+sim_options = {'name': 'cosine',
+               'user_based': True,
+               'max_k': 50# compute  similarities between items
+               }
+
+algo = KNNBasic(sim_options=sim_options)
+algo.fit(trainset2)
+predictions = algo.test(testset2)
+print(accuracy.rmse(predictions))
+assess_predictions(predictions, total_games)
+
+
+predictions = algo.test(testset3)
+print(calculate_coverage(predictions, total_games))
+print(calculate_weighted_coverage(predictions, good_games))
+
+algo = BaselineOnly()
+algo.fit(trainset2)
+predictions = algo.test(testset2)
+print(accuracy.rmse(predictions))
+assess_predictions(predictions, total_games)
+
+predictions = algo.test(testset3)
+print(calculate_coverage(predictions, total_games))
+print(calculate_weighted_coverage(predictions, good_games))
+
+sim_options = {'name': 'cosine',
+               'user_based': True  # compute  similarities between items
+               }
+algo = KNNBaseline(sim_options=sim_options)
 algo.fit(trainset2)
 predictions = algo.test(testset2)
 print(accuracy.rmse(predictions))
 
-algo = KNNBaseline()
+predictions = algo.test(testset3)
+print(calculate_coverage(predictions, total_games))
+print(calculate_weighted_coverage(predictions, good_games))
+
+
+sim_options = {'name': 'cosine',
+               'user_based': False  # compute  similarities between items
+               }
+
+algo = KNNBaseline(sim_options=sim_options)
 algo.fit(trainset2)
+algo.get_neighbors()
+help(trainset2)
+trainset2.to_inner_iid('Catan')
+
 predictions = algo.test(testset2)
 print(accuracy.rmse(predictions))
+print(assess_predictions(predictions, total_games))
 
+predictions = algo.test(testset3)
+print(calculate_weighted_coverage(predictions, good_games))
+
+    sim_options = {'name': 'cosine',
+                   'user_based': True  # compute  similarities between items
+                   }
+    algo = KNNBaseline(sim_options=sim_options)
+    algo.fit(trainset2)
+    predictions = algo.test(testset2)
+    print(assess_predictions(predictions, total_games))
+
+    predictions = algo.test(testset3)
+    print(calculate_weighted_coverage(predictions, good_games))
+    0.038232795242141036 * len(good_games)
+
+print(calculate_coverage(predictions, total_games))
+print(calculate_weighted_coverage(predictions, good_games))
+
+.02998 * total_games
 algo = KNNWithZScore()
 algo.fit(trainset2)
 predictions = algo.test(testset2)
@@ -168,131 +201,126 @@ print(accuracy.rmse(predictions))
 algo = NormalPredictor()
 algo.fit(trainset2)
 predictions = algo.test(testset2)
-print(accuracy.rmse(predictions))
+assess_predictions(predictions, total_games)
 
-algo = BaselineOnly()
-algo.fit(trainset2)
+predictions = algo.test(testset3)
+calculate_coverage(predictions, total_games)
+calculate_weighted_coverage(predictions, good_games)
+
 predictions = algo.test(testset2)
-print(accuracy.rmse(predictions))
+precisions, recalls = precision_recall_at_k(predictions, k=10, threshold=6)
+precisions
 
-trainset3 = bgg_steam_data[~bgg_steam_data.user.isin(users_25)]
-trainset3 = Dataset.load_from_df(trainset3[['user', 'game', 'rating']], reader)
-trainset3 = trainset3.build_full_trainset()
+    # Precision and recall can then be averaged over all users
+print(sum(prec for prec in precisions.values()) / len(precisions))
+print(sum(rec for rec in recalls.values()) / len(recalls))
 
-testset3 = bgg_steam_data[bgg_steam_data.user.isin(users_25)]
-testset3 = Dataset.load_from_df(testset3[['user', 'game', 'rating']], reader)
-testset3 = testset3.build_full_trainset()
-testset3 = testset3.build_testset()
+def assess_predictions(predictions, total_games):
+    rmse = accuracy.rmse(predictions)
+    coverage = calculate_coverage(predictions, total_games)
+    precisions, recalls = precision_recall_at_k(predictions, k=10, threshold=6)
+    print('coverage is ' + str(coverage))
+    print('MAP@10 is ' + str(sum(prec for prec in precisions.values()) / len(precisions)))
+    print('RMSE is ' + str(rmse))
 
-algo = BaselineOnly()
-algo.fit(trainset3)
-predictions = algo.test(testset3)
-print(accuracy.rmse(predictions))
+from collections import defaultdict
 
-algo = NormalPredictor()
-algo.fit(trainset3)
-predictions = algo.test(testset3)
-print(accuracy.rmse(predictions))
+from surprise import Dataset
+from surprise import SVD
+from surprise.model_selection import KFold
 
+precision_recall_at_k()
+def precision_recall_at_k(predictions, k=10, threshold=5.5):
+    '''Return precision and recall at k metrics for each user.'''
 
-## What is after this even??
+    # First map the predictions to each user.
+    user_est_true = defaultdict(list)
+    for uid, _, true_r, est, _ in predictions:
+        user_est_true[uid].append((est, true_r))
 
+    precisions = dict()
+    recalls = dict()
+    for uid, user_ratings in user_est_true.items():
 
-# Process data only include played games
-# Dedupe
-# Slice off 2 sigma outliers
-df2 = df[df.playtime_forever>0]
-df2 = df2.drop_duplicates()
-df2 = df2[df2.playtime_forever < df2.playtime_forever.mean()+2*df2.playtime_forever.std()]
+        # Sort user ratings by estimated value
+        user_ratings.sort(key=lambda x: x[0], reverse=True)
 
-# Descriptive stats
-# No. unique users
-# No. unique games
-df2.describe()
-df2.user.nunique()
-df2.appid.nunique()
+        # Number of relevant items
+        n_rel = sum((true_r >= threshold) for (_, true_r) in user_ratings)
 
-# No. installs
-install_counts = df2['name'].value_counts()/df2.user.nunique()
-install_counts = install_counts.sort_values(ascending=False)
-ic = pd.DataFrame({"game":install_counts.index,"proportion of players":install_counts})
-f, ax = plt.subplots(figsize=(8, 10))
-ic.head(1000)
-sns.distplot(ic['proportion of players'])
-plt.show()
-ic25 = ic.sort_values(by='proportion of players',ascending=False).head(25)
-ic25.head()
-ax = sns.barplot(x='proportion of players', y='game', data=ic25)
-ax.set(title='Most installed games among boardgamers',ylabel='game', xlabel='proportion of players with game')
-plt.show()
+        # Number of recommended items in top k
+        n_rec_k = sum((est >= threshold) for (est, _) in user_ratings[:k])
 
-no_of_games = df2['user'].value_counts()
-sns.set(style="whitegrid")
-ax = sns.distplot(no_of_games)
-ax.set(title='Distribution of game ownership', xlabel='no of games')
-plt.show()
-no_of_games.mode()
-game_info = pd.read_csv('steam_games.csv')
-game_info['genre'] = game_info.popular_tags.str.replace('[,].+$','')
+        # Number of relevant and recommended items in top k
+        n_rel_and_rec_k = sum(((true_r >= threshold) and (est >= threshold))
+                              for (est, true_r) in user_ratings[:k])
 
-ic = pd.merge(ic, game_info, how='left', left_on='game', right_on='name')
-genre_counts = ic.groupby('genre', as_index=False).count()
-sns.set(style="whitegrid")
-f, ax = plt.subplots(figsize=(8, 10))
-#sns.barplot(x='proportion of players', y='game', hue='genre', data=ic)
-ax = sns.barplot(x="game", y="genre", data=genre_counts)
-ax.set(title='Distribution of tags in \ntop 50 products among board gamers',ylabel='genre', xlabel='count')
-plt.savefig("temp.png")
-plt.show()
+        # Precision@K: Proportion of recommended items that are relevant
+        precisions[uid] = n_rel_and_rec_k / n_rec_k if n_rec_k != 0 else 1
 
-# histogram of installs
-unique_users = list(df.user.unique())
-df2.columns
-len(unique_users)
+        # Recall@K: Proportion of relevant items that are recommended
+        recalls[uid] = n_rel_and_rec_k / n_rel if n_rel != 0 else 1
 
-playtime=df2.groupby(by='name', as_index=False).playtime_forever.mean()
-pt= playtime.sort_values("playtime_forever", ascending=False)
-pt = pt.head(10)
-sns.set(style="whitegrid")
-f, ax = plt.subplots(figsize=(6, 15))
-sns.barplot(x='playtime_forever', y='name', data=pt)
+    return precisions, recalls
 
-sns.distplot(pt.playtime_forever)
-plt.show()
-plt.savefig("temp.png")
+from collections import defaultdict
 
-user_list = []
-for steam_id in unique_users:
-    avatar = urllib.parse.quote_plus(avatar)
-    req = rq.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={key}&steamids={id}'.format(key=my_key, id=steam_id))
-    user_info = json.loads(req.text).get('response').get('players')
-    user_list += user_info
-    print(steam_id)
+def read_item_names():
+    """Read the u.item file from MovieLens 100-k dataset and return two
+    mappings to convert raw ids into movie names and movie names into raw ids.
+    """
 
-df_users = pd.DataFrame(user_list)
-df_users.head()
+    file_name = get_dataset_dir() + '/ml-100k/ml-100k/u.item'
+    rid_to_name = {}
+    name_to_rid = {}
+    with io.open(file_name, 'r', encoding='ISO-8859-1') as f:
+        for line in f:
+            line = line.split('|')
+            rid_to_name[line[0]] = line[1]
+            name_to_rid[line[1]] = line[0]
 
-unique_apps = list(df.appid.unique())
-app_list = []
-for app_id in unique_apps:
-    req = rq.get('https://store.steampowered.com/api/appdetails/?appids={id}'.format(id=str(app_id)))
-    app = json.loads(req.text).get(str(app_id)).get('data')
-    app_list += app
-    timer.sleep(2)
-    print(app_id)
+    return rid_to_name, name_to_rid
 
-df_apps = pd.DataFrame(app_list)
-df_apps.head()
+def calculate_coverage(predictions, total_games, k=10):
+    user_est_true = defaultdict(list)
+    top_k_games = []
+    for uid, iid, _, est, _ in predictions:
+        user_est_true[uid].append((est, iid))
+    for uid, user_ratings in user_est_true.items():
+        # Sort user ratings by estimated value
+        user_ratings.sort(key=lambda x: x[0], reverse=True)
+        # Number of recommended items in top k
+        top_k_games += [game for (_, game) in user_ratings[0:k]]
+    return len(set(top_k_games))/total_games
+
+def calculate_weighted_coverage(predictions, good_games, k=10):
+    user_est_true = defaultdict(list)
+    top_k_games = []
+    for uid, iid, _, est, _ in predictions:
+        user_est_true[uid].append((est, iid))
+    for uid, user_ratings in user_est_true.items():
+        # Sort user ratings by estimated value
+        user_ratings.sort(key=lambda x: x[0], reverse=True)
+        # Number of recommended items in top k
+        top_k_games += [game for (_, game) in user_ratings[0:k]]
+    okay_games = set(good_games).intersection(set(top_k_games))
+    return len(okay_games) / len(good_games)
+
+    precisions = dict()
+    recalls = dict()
+
+        # Number of relevant items
+        n_rel = sum((true_r >= threshold) for (_, true_r) in user_ratings)
 
 
+        # Number of relevant and recommended items in top k
+        n_rel_and_rec_k = sum(((true_r >= threshold) and (est >= threshold))
+                              for (est, true_r) in user_ratings[:k])
 
-# make user, item matrix
-# check sparsity
-# train recommender
+        # Precision@K: Proportion of recommended items that are relevant
+        precisions[uid] = n_rel_and_rec_k / n_rec_k if n_rec_k != 0 else 1
 
-# step 1: access games list
+        # Recall@K: Proportion of relevant items that are recommended
+        recalls[uid] = n_rel_and_rec_k / n_rel if n_rel != 0 else 1
 
-# step 2: normalize playtime data
-
-# step 3: get list of games
-# filter out video games
+    return precisions, recalls

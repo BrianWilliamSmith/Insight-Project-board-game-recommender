@@ -37,7 +37,9 @@ def get_games(steam_id, my_key):
         user_games = user_games[['game', 'rating', 'user']]
         return(user_games)
 
-
+def transform_playtimes_to_ratings(user_game_rating_dataframe:
+    '''
+    '''
 
 
 

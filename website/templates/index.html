@@ -1,15 +1,21 @@
 <html>
 <head>
 <title>Go Analog</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
 </head>
 <body>
-<h1>Go Analog</h1>
-<h2>Enter steam id below</h2>
+<div class="topnav">
+  <a href="../">Home</a>
+  <a href= "{{ url_for('static',filename='about.html') }}">About</a>
+</div>
+<img class='logo' src="{{ url_for('static',filename='/GoAnalog.png')}}">
+<h1>games unplugged</h1>
+    <h3>Enter steam id for personalized<br>board game recommendations</h3>
 <form method="POST">
     {{ form.csrf_token }}
     {{ form.steam_id_form.label }}
     {{ form.steam_id_form }}
-    <input type="submit" value="get board games">
+    <input type="submit" value="recommend board games">
 </form>
 </body>
 </html>
