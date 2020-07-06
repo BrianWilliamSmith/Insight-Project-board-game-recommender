@@ -3,7 +3,9 @@ import re
 import time
 import pandas as pd
 import glob
-from games_api_functions import get_steam_id
+
+# This script creates a list of BGG users to look up on Steam
+# It outputs a csv of bgg users with info
 
 # Create list of BGG users to check on Steam
 # Two sources:
@@ -15,7 +17,7 @@ from games_api_functions import get_steam_id
 # has a particular interest, e.g. the video game Civ III
 
 game_groups = []
-for file_name in glob.glob('./bgg_group_pages/*.html'):
+for file_name in glob.glob('scraping_cleaning_normalizing/bgg_group_pages/*.html'):
     results_page = open(file_name,'r').read()
     game_groups += re.findall("\/microbadge\/[0-9]+", results_page)
 
@@ -47,4 +49,4 @@ bgg_users_df = pd.DataFrame(users, columns=['user_name'])
 
 bgg_users_df.drop_duplicates(inplace=True)
 
-bgg_users_df.to_csv('users_from_bgg.csv')
+bgg_users_df.to_csv('scraping_cleaning_normalizing/users_from_bgg.csv')

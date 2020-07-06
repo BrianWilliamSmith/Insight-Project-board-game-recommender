@@ -3,12 +3,15 @@ import pandas as pd
 import time
 import re
 
-games = pd.read_csv('csvs/bgg_steam_data_normed.csv', index_col=0)
+# This script creates a boardgame info lookup table, which includes images
+# and other important information
+
+games = pd.read_csv('bgg_steam_data_normed.csv', index_col=0)
 games = games[games.source=='bgg']
 important_games = list(set(games.game))
 
 # Get id for important games from game lookup table
-game_lookup = pd.read_csv('csvs/bgg_GameItem.csv', index_col=0)
+game_lookup = pd.read_csv('bgg_GameItem.csv', index_col=0)
 game_ids = []
 for game in important_games:
     game_id = game_lookup[game_lookup.name==game].index[0]
@@ -47,8 +50,6 @@ game_info_2 = game_lookup[['name',
                            'avg_rating',
                            'rank'
                            ]]
-
-game_info
 
 lookup_important_games = game_info.merge(game_info_2, left_on='name', right_on='name', how='left')
 lookup_important_games.to_csv('important_games_info.csv')
@@ -90,4 +91,4 @@ name_urls
 game_info = pd.DataFrame(list(zip(names, name_urls, ratings, times, players, complexity, ranks)),
              columns = ['Name', 'Game', 'BGG rating', 'Time', 'Players', 'Complexity', 'Ranking'])
 
-game_info.to_csv('game_info_lookup.csv')
+game_info.to_csv('app/game_info_lookup.csv')

@@ -70,9 +70,11 @@ td {
     vertical-align: middle;
 	border: none;
 }
+
 th {
 	vertical-align: bottom;
 }
+
 thead {
 	th {
 		background-color: #55608f;

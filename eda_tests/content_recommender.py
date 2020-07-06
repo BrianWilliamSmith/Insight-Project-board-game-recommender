@@ -21,14 +21,14 @@ def make_game_tag_matrix(dataframe):
     game_tag_matrix.fillna(0, inplace=True)
     return game_tag_matrix
 
-steam_games = pd.read_csv('csvs/steam_games.csv')
+steam_games = pd.read_csv('../csvs/steam_games.csv')
 steam_games = steam_games[['url', 'popular_tags']]
 steam_games['url'] = steam_games.url.str.extract(r'.*/app/([0-9]*?)/.*$',
                                                  expand=False)
 steam_games['url'] = ['steam'+ str(game) for game in list(steam_games.url)]
 steam_games.rename(columns={'popular_tags':'tags', 'url':'name'}, inplace=True)
 
-bgg_games = pd.read_csv('csvs/bgg_GameItem.csv')
+bgg_games = pd.read_csv('../scraping_cleaning_normalizing/bgg_GameItem.csv')
 bgg_games = bgg_games[['name', 'mechanic', 'category', 'game_type', 'family']]
 bgg_games = bgg_games.fillna('')
 bgg_games['tags'] = bgg_games['mechanic'] + ',' + \
@@ -44,9 +44,10 @@ steam_game_tag_matrix.to_csv('steam_game_tag_matrix.csv')
 bgg_game_tag_matrix = make_game_tag_matrix(bgg_games)
 bgg_game_tag_matrix.to_csv('bgg_game_tag_matrix.csv')
 
-bgg_steam_data = pd.read_csv('csvs/bgg_steam_data_normed.csv', index_col=0)
-bgg_game_tag_matrix = pd.read_csv('csvs/bgg_game_tag_matrix.csv', index_col=0)
-steam_game_tag_matrix = pd.read_csv('csvs/steam_game_tag_matrix.csv', index_col=0)
+bgg_steam_data = pd.read_csv(
+    '../scraping_cleaning_normalizing/bgg_steam_data_normed.csv', index_col=0)
+bgg_game_tag_matrix = pd.read_csv('../csvs/bgg_game_tag_matrix.csv', index_col=0)
+steam_game_tag_matrix = pd.read_csv('../csvs/steam_game_tag_matrix.csv', index_col=0)
 
 bgg_game_tag_matrix_pruned = bgg_game_tag_matrix[bgg_game_tag_matrix.game.isin(set(bgg_steam_data.game))]
 steam_game_tag_matrix_pruned = steam_game_tag_matrix[steam_game_tag_matrix.game.isin(set(bgg_steam_data.game))]
@@ -71,10 +72,12 @@ bgg_game_tag_matrix_pruned.to_csv('bgg_game_tag_matrix.pruned.csv')
 steam_game_tag_matrix_pruned.to_csv('steam_game_tag_matrix.pruned.csv')
 
 import pandas as pd
-bgg_steam_data = pd.read_csv('csvs/bgg_steam_data_normed.csv', index_col=0)
-bgg_game_tag_matrix_pruned = pd.read_csv('csvs/bgg_game_tag_matrix.pruned.csv', index_col=0)
+bgg_steam_data = pd.read_csv(
+    '../scraping_cleaning_normalizing/bgg_steam_data_normed.csv', index_col=0)
+bgg_game_tag_matrix_pruned = pd.read_csv(
+    '../csvs/bgg_game_tag_matrix.pruned.csv', index_col=0)
 steam_game_tag_matrix_pruned = pd.read_csv(
-    'csvs/steam_game_tag_matrix.pruned.csv', index_col=0)
+    '../csvs/steam_game_tag_matrix.pruned.csv', index_col=0)
 
 blacklist = pd.read_csv('user_list.csv', index_col=0)
 blacklist = blacklist.loc[(blacklist["brian thinks it's probably a dupe"]=='x')|(blacklist.aaron=='x'),'0']
@@ -113,31 +116,35 @@ profiles = profiles.replace(0, np.nan)
 corr_matrix = profiles.corr(method='spearman')[bgg_user_profiles.columns].filter(items=steam_user_profiles.columns, axis=0)
 corr_matrix.to_csv('corr_matrix_tags.csv')
 
+corr_matrix = pd.read_csv('../csvs/corr_matrix_tags.csv', index_col=0)
 scifi_corrs = corr_matrix.loc['Sci-fi',:].sort_values(ascending=False)
-scifi_corrs = scifi_corrs[['1016','1113','5496','4664','1047','1082','1028','5499','2004','2048']]
-
+scifi_corrs = scifi_corrs[['1016','1113','5496','4664','1082','1028','5499: Family']]
+scifi_corrs
 scifi_colnames = {'1016':'Sci-fi',
             '1113':'Space Exploration',
             '5496': 'Thematic Games',
             '4664': 'War Games',
-            '1047':'Miniatures',
+            #'1047':'Miniatures',
             '1082':'Mythology',
             '1028': 'Puzzle',
-            '5499': 'Family Games',
-            '2004': 'Set Collection',
-            '2048': 'Pattern Building'}
+            '5499: Family': 'Family Games'}
+            # ,
+            #'2004': 'Set Collection',
+            #'2048': 'Pattern Building'}
 
 names = list(scifi_colnames.values())
 vals = scifi_corrs.values
 
-import matplotlib.pyplot as plt
+import matplotlib.pylab as plt
 import seaborn as sns
 
 x = sns.barplot(y=names, x=vals, color='#00a2ed')
-x.set(title = 'Correlations between ratings for sci-fi video games\nand ratings for board game attributes', xlabel = 'Correlation coefficient')
+x.set(title = 'Correlations between user ratings for sci-fi video games\nand user ratings for board game attributes',
+      xlabel = 'Correlation coefficient',
+      ylabel = 'Boardgame attributes')
 
 plt.show()
-plt.savefig()
+plt.savefig('visualizations/corr_pruned.png')
 
 
 scifi_corrs.reindex(scifi_colnames)
