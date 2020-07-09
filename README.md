@@ -27,11 +27,11 @@ The code is mainly divided into three folders:
 * **eda_tests** contains jupyter notebooks for analysis of the data set
 
 ## How Go Analog works
-Go Analog makes recommendations using [item-based collaborative filtering](). Basically, it recommends board games that are similar to the video games you play.
+Go Analog makes recommendations using [item-based collaborative filtering](https://en.wikipedia.org/wiki/Item-item_collaborative_filtering). Basically, it recommends board games that are similar to the video games you play.
 
-Similarity here really means 'liked by similar people.' So if the same people like both 'Pong' and 'Candy Land', those two games are similar. You can find the entire similarity matrix — really the heart of Go Analog! — [in the repo]().
+Similarity here really means 'liked by similar people.' So if the same people like both 'Pong' and 'Candy Land', those two games are similar. You can find the entire similarity matrix — really the heart of Go Analog! — [in the repo](https://github.com/BrianWilliamSmith/Insight-Project-board-game-recommender).
 
-[Here]() are slides if you want to read more about the business context of the app or how the data were collected.
+[Here](https://docs.google.com/presentation/d/16JGC_vJrtQKlkViPoCGy1kgdfBGs667lXzVwMJ1LmWM/edit?usp=sharing) are slides if you want to read more about the business context of the app or how the data were collected.
 
 ## Why item-based collaborative filtering?
 I considered many algos while building the app:
@@ -59,5 +59,5 @@ Item-based collaborative filtering wins across the board
     *  Adding content-based recommendation would allow Go Analog to make predictions about any game, even games that no one has ever played
  
 ## Links
-* [Website]()
-* [Slides for project]()
+* [GoAnalog website](http://fromdatatoknowledge.xyz)
+* [Slides for project](https://docs.google.com/presentation/d/16JGC_vJrtQKlkViPoCGy1kgdfBGs667lXzVwMJ1LmWM/edit?usp=sharing)
