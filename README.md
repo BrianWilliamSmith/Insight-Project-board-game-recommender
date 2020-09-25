@@ -29,7 +29,7 @@ The code is divided into the folders:
 ## How Go Analog works
 Go Analog makes recommendations using [item-based collaborative filtering](https://en.wikipedia.org/wiki/Item-item_collaborative_filtering). Basically, it recommends board games that are similar to the video games you play.
 
-Similarity here really means 'liked by similar people.' So if the same people like both 'Pong' and 'Candy Land', those two games are similar. You can find the entire similarity matrix — really the heart of Go Analog! — [in the repo](https://github.com/BrianWilliamSmith/Insight-Project-board-game-recommender/).
+Similarity here really means 'liked by similar people.' So if the same people like both 'Pong' and 'Candy Land', those two games are similar. You can find the entire similarity matrix — really the heart of Go Analog! — [in the repo](https://github.com/BrianWilliamSmith/Insight-Project-board-game-recommender/blob/master/app/sim_matrix.txt).
 
 [Here](https://docs.google.com/presentation/d/16JGC_vJrtQKlkViPoCGy1kgdfBGs667lXzVwMJ1LmWM/edit?usp=sharing) are slides if you want to read more about the business context of the app or how the data were collected.
 
