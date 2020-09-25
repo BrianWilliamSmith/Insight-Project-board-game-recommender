@@ -21,15 +21,15 @@ This repo contains the code for the entire Go Analog project.
 
 Erring on the side of privacy, I've omitted most of the raw data, since they include personal information that could potentially be used to identify users (usernames, real names, locations, etc.).
 
-The code is mainly divided into three folders:
+The code is divided into the folders:
 * **scraping_cleaning_normalizing** contains all of the scripts used to build the dataset, numbered by order of application
-* **app** contains the Go Analog flask app
-* **eda_tests** contains jupyter notebooks for analysis of the data set
-
+* **app** contains the code for the [Go Analog flask app](http://fromdatatoknowledge.xyz)
+* **eda_tests** contains jupyter notebooks that were used to examine the data set and test different recommendation algos (using the library Surprise)
+* **streamlit_version** is the streamlit version of the app, [hosted on heroku](https://go-analog.herokuapp.com/)
 ## How Go Analog works
 Go Analog makes recommendations using [item-based collaborative filtering](https://en.wikipedia.org/wiki/Item-item_collaborative_filtering). Basically, it recommends board games that are similar to the video games you play.
 
-Similarity here really means 'liked by similar people.' So if the same people like both 'Pong' and 'Candy Land', those two games are similar. You can find the entire similarity matrix — really the heart of Go Analog! — [in the repo](https://github.com/BrianWilliamSmith/Insight-Project-board-game-recommender).
+Similarity here really means 'liked by similar people.' So if the same people like both 'Pong' and 'Candy Land', those two games are similar. You can find the entire similarity matrix — really the heart of Go Analog! — [in the repo](https://github.com/BrianWilliamSmith/Insight-Project-board-game-recommender/).
 
 [Here](https://docs.google.com/presentation/d/16JGC_vJrtQKlkViPoCGy1kgdfBGs667lXzVwMJ1LmWM/edit?usp=sharing) are slides if you want to read more about the business context of the app or how the data were collected.
 

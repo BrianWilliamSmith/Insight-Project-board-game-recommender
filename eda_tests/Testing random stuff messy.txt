@@ -1,0 +1,169 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+dict1 = {'a':1, 'b':2, 'c':3}
+dict2 = {'a':1, 'b':3, 'c':4, 'd':5}
+df = pd.DataFrame([dict1, dict2])
+df
+df.append(dict3, ignore_index=True)
+
+bgg_info = pd.read_csv('csvs/bgg_info.txt')
+list_of_bgs = bgg_info.Name
+plotty = pd.read_csv('csvs/steam_users_games.csv')
+plotty.playtime_forever.hist()
+
+pd.Series(np.log1p(plotty.playtime_forever)).hist()
+
+plt.show()
+len(bgg_steam_data[bgg_steam_data.game.isin(list_of_bgs)])
+
+
+bgg_steam_data.to_csv('bgg_steam_data.csv')
+bgg_steam_data = bgg_steam_data[(bgg_steam_data.source=='steam')|
+                                (bgg_steam_data.game.isin(list_of_bgs))]
+bgg_steam_data_pruned = bgg_steam_data
+bgg_steam_data_pruned.to_csv('bgg_steam_data_pruned.csv')
+len(bgg_steam_data_pruned)
+
+bgg_steam_data_pruned.describe()
+
+# games_ratings = {dictionary.get('appid'):dictionary.get('playtime_forever') for dictionary in glist}
+# new_ratings = {game:games_ratings.get('game') for game in list_of_games}
+# df.append(new_ratings, ignore_index=True)
+#
+# list_of_games = bgg_steam_data.game
+# new_user_games_ratings = {game: key for game in list_of_games}
+#
+# df = bgg_steam_data[['game','rating']]
+# new_user_ratings.rating = np.log(new_user_rating.playtime_forever)
+#
+# # ADD USER
+#
+# # RETRAIN
+#
+# # Test every boardgame
+#
+# list_of_games =
+# df.append(dict4, ignore_index=True)
+#
+# test
+# set2 = bgg_steam_data[~bool_is_training]
+#
+# [pd.DataFrame([i], columns=['A']) for i in range(5)]
+#
+# pd.concat([df1,df2],join_axes=[df1.columns])
+#
+#
+#
+# df.columns.intersection
+
+app = 286160
+req = rq.get('http://store.steampowered.com/appreviews/{appid}?json=1'.format(appid=app))
+reviews = json.loads(req.text)
+reviewers = pd.DataFrame([dict.get('author') for dict in reviews.get('reviews')])
+reviewers.columns
+reviewers.describe()
+len(reviewers)
+x= reviewers.num_reviews/reviewers.num_games_owned
+x = x[x<=1]
+x = x[x>=0]
+fig = sns.distplot(x, kde = False, bins=20, norm_hist=True)
+fig.set(xlabel="Proportion of games reviewed", ylabel="Number of players")
+plt.show()
+
+steamusers = pd.read_csv('csvs/steam_users_games.csv')
+steamusers = steamusers[steamusers.playtime_forever<15000]
+x = steamusers.groupby('user').playtime_forever.sum()
+x = x[x>0]
+x = x[x<1000000]
+steamusers
+x = x/60
+sns.set_style('whitegrid')
+fig = sns.distplot(x)
+fig.set(xlabel="Total playtime (hours)", ylabel="Proportion of players")
+x.median()
+x.mean()
+plt.show()
+
+x = pd.read_csv('csvs/bgg_GameItem.csv', index_col=0)
+import seaborn as sns
+counts = x.year.value_counts()
+years = list(counts.index)
+counts=list(counts)
+test=pd.DataFrame(zip(years,counts), columns=['years','count'])
+test=test[(test.years>1980)&(test.years<2020)]
+test
+years
+years
+p = sns.lineplot(data=test, x='years', y='count')
+p.set(xlabel='Year', ylabel='Number of boardgames released')
+plt.show()
+sns.set(x)
+
+
+
+bgg_users_video_games = pd.DataFrame(all_users)
+bgg_users_video_games.to_csv("bgg_users_video_games.csv")
+bgg_users_video_games.steam_id.nunique()
+
+bgg_users = pd.read_csv('bgg_users_steam_ids.csv', index_col=0)
+bgg_user_name_steam_id_key = bgg_users[['user_name', 'steam_id']]
+bgg_user_name_steam_id_key.drop_duplicates(inplace=True)
+
+crossplat_bgg_users = bgg_users_video_games
+crossplat_bgg_users = crossplat_bgg_users.merge(bgg_user_name_steam_id_key, how='left', on='steam_id')
+crossplat_bgg_users = crossplat_bgg_users.user_name.unique()
+
+
+###
+steam_bgg_ids = pd.concat([df.steam_id, df.avatar], axis=1)
+steam_bgg_ids.drop_duplicates(inplace=True)
+good_steam_users = good_steam_users.merge(steam_bgg_ids, how='left', on='steam_id')
+
+###
+
+shared_users_from_bgg = pd.DataFrame(all_users)
+shared_users_from_bgg.steam_id.nunique()
+shared_users_from_bgg.to_csv("shared_users_from_bgg_with_vgs.csv")
+
+#
+
+good_steam_users = list(games_users_from_steam.user.unique())
+good_steam_users = pd.DataFrame(good_steam_users, columns = ['steam_id'])
+
+steam_bgg_ids = pd.concat([df.steam_id, df.avatar], axis=1)
+steam_bgg_ids.drop_duplicates(inplace=True)
+good_steam_users = good_steam_users.merge(steam_bgg_ids, how='left', on='steam_id')
+
+bgg_users_games_2 = pd.DataFrame(list_of_games, columns=['user', 'game', 'rating'])
+bgg_users_games_2.drop_duplicates(inplace=True)
+bgg_users_games_2.to_csv('bgg_users_games_2.csv')
+
+
+# Load bgg shared users 1
+bgg_users_games = pd.read_csv('../csvs/bgg_users_games.csv', index_col=0)
+bgg_users_games_2 = pd.read_csv('../csvs/bgg_users_games_2.csv', index_col=0)
+bgg_users_games_2.user.nunique()
+
+# Identify users in both sets of users -- remove them!!
+shared_users = set(bgg_users_games.user).intersection(bgg_users_games_2.user)
+bgg_users_games_2 = bgg_users_games_2[~bgg_users_games_2.user.isin(shared_users)]
+bgg_users_games_final = pd.concat([bgg_users_games, bgg_users_games_2],
+                                  ignore_index=True,
+                                  axis=0)
+
+bgg_users_games_final.to_csv('bgg_users_games_final.csv')
+
+# Do the same thing for video games
+steam_users_games = pd.read_csv('../csvs/steam_users_games.csv', index_col=0)
+steam_users_games.rename(columns={'user':'steam_id'}, inplace=True)
+steam_users_games_2 = pd.read_csv('../csvs/bgg_users_video_games.csv', index_col=0)
+
+shared_users = set(steam_users_games.steam_id).intersection(steam_users_games_2.steam_id)
+steam_users_games_2 = steam_users_games_2[~steam_users_games_2.steam_id.isin(shared_users)]
+steam_users_games_final = pd.concat([steam_users_games, steam_users_games_2],
+                                  ignore_index=True,
+                                  axis=0)
+steam_users_games_final.to_csv('steam_users_games_final.csv')
