@@ -1,2 +1,4 @@
 *.csv
-*.txt
+!/app/*
+!/streamlit_version/*
+key.txt
