@@ -42,7 +42,7 @@ def get_recs_table(steam_id, my_key):
         table_to_print['Ranking'] = table_to_print.Ranking.str.replace('[.]0', '')
         table_to_print['Ranking'] = table_to_print.Ranking.apply(lambda x: '#'+str(x))
         table_to_print['Ranking'] = table_to_print.Ranking.str.replace('#nan', '?')
-        table_to_print['Complexity'] = table_to_print.Ranking.str.replace('#nan', '?')
+        table_to_print['Complexity'] = table_to_print.Complexity.str.replace('#nan', '?')
 
         table_to_print = table_to_print[['Game', 'Your ranking',  'Ranking', 'Players', 'Time', 'Complexity']]
 
