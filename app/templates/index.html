@@ -9,8 +9,7 @@
   <a href= "{{ url_for('static',filename='about.html') }}">About</a>
 </div>
 <img class='logo' src="{{ url_for('static',filename='/GoAnalog.png')}}">
-<h1>games unplugged</h1>
-    <h3>Enter steam id for personalized<br>board game recommendations</h3>
+    <h3>enter steam id for personalized<br>board game recommendations</h3>
 <form method="POST">
     {{ form.csrf_token }}
     {{ form.steam_id_form.label }}
