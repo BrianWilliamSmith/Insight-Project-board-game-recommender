@@ -47,7 +47,7 @@ for user_name in users.user_name:
     print('first time: ' + user_name)
     time.sleep(1)
 
-#Second api call accesses
+#Second api call accesses data
 boardgame_dict = {}
 for user_name in users.user_name:
     collection = get_bgg_collection(user_name)

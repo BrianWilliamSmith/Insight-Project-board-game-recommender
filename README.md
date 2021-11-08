@@ -1,3 +1,5 @@
+This repo contains the old version of Go Analog which was built using Flask. The new version, almost entirely rewritten, is available [here](https://github.com/BrianWilliamSmith/go_analog_tools)
+
 # Go Analog: a boardgame recommender
 
 > [Go Analog](http://fromdatatoknowledge.xyz) is a web app that recommends boardgames to videogamers.
